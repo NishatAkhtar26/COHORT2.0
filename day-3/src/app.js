@@ -26,6 +26,9 @@ app.post("/notes",(req,res) => {
 })
 
 
+app.get("/", (req,res) => {
+    res.send("Welcome to Notes App")
+})
 
 
 app.get("/notes", (req,res) => {
