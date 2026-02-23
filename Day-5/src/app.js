@@ -23,4 +23,17 @@ app.post("/notes", async(req,res) => {
 })
 
 
+//GET
+//Fetch All notes data
+
+app.get("/notes", async(req,res) => {
+     const notes = await notesModel.find()
+
+        res.status(200).json({
+            message: "Note Fetched Successfully!",
+            notes
+        })
+     
+})
+
 module.exports = app;
