@@ -4,8 +4,14 @@ const express = require("express");
 
 const noteModel = require("./models/note.model"); //importing note model to save data in mongodb
 
+const cors = require("cors"); //importing cors to allow cross-origin requests from frontend
 const app = express();
+const path = require("path");
+app.use(cors()); //middleware to allow cross-origin requests from frontend
 app.use(express.json()); //middleware to parse json data from request body
+app.use(express.static("./public")) //middleware to serve static files from public folder
+
+
 
 /**
  * Post/api/notes -> create a note
@@ -71,6 +77,12 @@ app.patch("/api/notes/:id", async(req,res)=> {
     res.status(200).json({
         message: "Note Updated Successfully"
     })
+})
+
+console.log(__dirname);
+
+app.use('*name',(req,res) => {//wildcard route to handle all other routes that are not defined above
+  res.sendFile(path.join(__dirname, "../public/index.html"))
 })
 
 
